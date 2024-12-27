@@ -1,0 +1,51 @@
+.title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+
+    span {
+        font-size: 20px;
+        font-weight: bold;
+    }
+
+    .line {
+        width: 100%;
+        flex: 1;
+
+        hr {
+            border: 1px solid aliceblue;
+        }
+    }
+}
+
+.movieList {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 200px);
+    justify-content: space-around;
+    gap: 30px;
+
+    .movieCard {
+        height: 300px;
+        border: 1px solid black;
+        border-radius: 5px;
+        background-size: cover;
+        background-position: center;
+        display: flex;
+        flex-direction: column-reverse;
+        cursor: pointer;
+        transition: box-shadow 0.3s;
+
+        &:hover {
+            box-shadow: 2px 2px 5px 2px grey;
+        }
+
+        h3 {
+            font-size: 15px;
+            padding: 150px 10px 10px 10px;
+            color: white;
+            font-weight: normal;
+            background-image: linear-gradient(to top, black, transparent);
+        }
+    }
+}
