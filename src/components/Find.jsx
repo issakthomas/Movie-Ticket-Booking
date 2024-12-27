@@ -1,8 +1,12 @@
 import PropTypes from "prop-types";
 import "./Find.css";
 import Search from "./Search";
+import axios from "axios";
 
 const Find = ({ movies, setMovies }) => {
+	const addMovie = async (movie) => {
+		await axios.post("http://localhost:3000/movies", movie);
+	};
 	console.log(movies);
 	return (
 		<>
@@ -24,6 +28,7 @@ const Find = ({ movies, setMovies }) => {
 									? `url(https://image.tmdb.org/t/p/w500/${movie.poster_path})`
 									: "url(/poster.png)",
 							}}
+							onClick={() => addMovie(movie)}
 						>
 							<h3>{movie.title}</h3>
 						</div>

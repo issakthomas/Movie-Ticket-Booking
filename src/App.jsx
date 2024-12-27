@@ -5,6 +5,7 @@ import Now from "./components/Now";
 import Add from "./components/Add";
 
 function App() {
+	const [added, setAdded] = useState([]);
 	const [movies, setMovies] = useState([]);
 	const [section, setSection] = useState("add");
 	const [user, setUser] = useState("normal");
@@ -12,9 +13,8 @@ function App() {
 		if (user == "normal") setUser("admin");
 		else setUser("normal");
 	};
-	console.log(user);
+	console.log(added);
 
-	console.log(section);
 	return (
 		<>
 			<header>
@@ -47,12 +47,12 @@ function App() {
 						</button>
 					</div>
 					{section === "find" && <Find movies={movies} setMovies={setMovies} />}
-					{section === "add" && <Add />}
+					{section === "add" && <Add added={added} setAdded={setAdded} />}
 				</section>
 			)}
 			{user === "normal" && (
 				<section className="main">
-					<Now />
+					<Now added={added} setAdded={setAdded} />
 				</section>
 			)}
 		</>

@@ -1,5 +1,5 @@
 import "./Search.css";
-import fetchMovie from "./Api";
+import fetchMovie from "./tmdbFetch";
 import { useState } from "react";
 import PropTypes from "prop-types";
 

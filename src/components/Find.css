@@ -22,7 +22,7 @@
 .movieList {
     display: grid;
     grid-template-columns: repeat(auto-fit, 200px);
-    justify-content: space-around;
+    justify-content: center;
     gap: 30px;
 
     .movieCard {
