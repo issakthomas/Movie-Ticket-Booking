@@ -18,17 +18,63 @@ header {
         }
     }
 
-    .icon {
-        font-size: 25px;
+    #userSwitch {
+        display: none;
+    }
+
+    #userSwitch:checked + label {
+        span {
+            display: inline;
+        }
+
+        i {
+            color: rgb(0, 136, 255);
+        }
+    }
+
+    label {
         display: flex;
         align-items: center;
-        gap: 15px;
+        gap: 5px;
+        padding: 5px;
+        border: 1px solid;
+        border-radius: 20px;
+
+        span {
+            display: none;
+            font-size: 12px;
+            padding: 5px;
+        }
+
+        i {
+            font-size: 25px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
     }
 }
 
-.movies {
+.main {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
     background-color: rgb(217, 236, 252);
-    margin: 0 10px;
+    margin: 0 10px 10px 10px;
     border-radius: 5px;
     padding: 30px;
+
+    .buttons {
+        display: flex;
+        gap: 10px;
+
+        button {
+            width: 100%;
+            background-color: white;
+            border: 0;
+            border-radius: 5px;
+            padding: 10px;
+        }
+    }
 }
