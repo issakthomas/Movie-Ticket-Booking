@@ -16,6 +16,9 @@ const Search = ({ setMovies }) => {
 					onChange={(e) => setQuery(e.target.value)}
 					type="text"
 					placeholder="type to search movie"
+					onKeyDown={(e) => {
+						if (e.key === "Enter") handleSearch();
+					}}
 				/>
 				<i onClick={handleSearch} className="fa-solid fa-magnifying-glass"></i>
 			</div>

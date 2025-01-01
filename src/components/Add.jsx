@@ -22,23 +22,25 @@ const Add = ({ added, setAdded }) => {
 
 	return (
 		<>
-			<div className="movieList">
-				{added.length > 0 &&
-					added.map((movie) => (
-						<div
-							key={movie.id}
-							className="movieCard"
-							style={{
-								backgroundImage: movie.poster_path
-									? `url(https://image.tmdb.org/t/p/w500/${movie.poster_path})`
-									: "url(/poster.png)",
-							}}
-							onClick={() => removeMovie(movie.id)}
-						>
-							<h3>{movie.title}</h3>
-						</div>
-					))}
-			</div>
+			{added.length > 0 && (
+				<div className="movieList">
+					{added.length > 0 &&
+						added.map((movie) => (
+							<div
+								key={movie.id}
+								className="movieCard"
+								style={{
+									backgroundImage: movie.poster_path
+										? `url(https://image.tmdb.org/t/p/w500/${movie.poster_path})`
+										: "url(/poster.png)",
+								}}
+								onClick={() => removeMovie(movie.id)}
+							>
+								<h3>{movie.title}</h3>
+							</div>
+						))}
+				</div>
+			)}
 		</>
 	);
 };
