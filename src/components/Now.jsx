@@ -4,20 +4,22 @@ import PropTypes from "prop-types";
 import axios from "axios";
 
 const Now = ({ added, setAdded }) => {
-	const serverFetch = async () => {
-		try {
-			const response = await axios.get("http://localhost:3000/movies");
-			setAdded(response.data);
-		} catch (error) {
-			console.error("Error fetching data:", error.message);
-		}
-	};
 	useEffect(() => {
+		const serverFetch = async () => {
+			try {
+				const response = await axios.get("http://localhost:3000/movies");
+				setAdded(response.data);
+			} catch (error) {
+				console.error("Error fetching data:", error.message);
+			}
+		};
+
 		serverFetch();
-	},[]);
+	}, [setAdded]);
+
 	return (
 		<>
-			<div className="title">
+			<div className="nowTitle title">
 				<span>Now Playing</span>
 				<div className="line">
 					<hr />

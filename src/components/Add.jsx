@@ -3,21 +3,21 @@ import axios from "axios";
 import PropTypes from "prop-types";
 
 const Add = ({ added, setAdded }) => {
-	const serverFetch = async () => {
-		try {
-			const response = await axios.get("http://localhost:3000/movies");
-			setAdded(response.data);
-		} catch (error) {
-			console.error("Error fetching data:", error.message);
-		}
-	};
 	useEffect(() => {
+		const serverFetch = async () => {
+			try {
+				const response = await axios.get("http://localhost:3000/movies");
+				setAdded(response.data);
+			} catch (error) {
+				console.error("Error fetching data:", error.message);
+			}
+		};
+
 		serverFetch();
-	}, []);
+	}, [setAdded]);
 
 	const removeMovie = async (id) => {
-		setAdded(added.filter((movie) => movie.id !== id));
-		console.log(added);
+		await axios.delete(`http://localhost:3000/movies/id=${id}`);
 	};
 
 	return (

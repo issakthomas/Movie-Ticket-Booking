@@ -2,12 +2,14 @@ import PropTypes from "prop-types";
 import "./Find.css";
 import Search from "./Search";
 import { useState } from "react";
+import axios from "axios";
 
 const Find = ({ movies, setMovies }) => {
 	const [popupMessage, setPopupMessage] = useState("");
 	const addMovie = async (movie) => {
 		setPopupMessage(`${movie.title} has been added to the list!`);
 		setTimeout(() => setPopupMessage(""), 3000);
+		await axios.post("http://localhost:3000/movies", movie);
 	};
 	console.log(movies);
 	return (
