@@ -1,59 +1,54 @@
 import { useEffect } from "react";
 import axios from "axios";
-import PropTypes from "prop-types";
+import { useState } from "react";
 
-const Add = ({ added, setAdded }) => {
+const Add = () => {
+	const [added, setAdded] = useState([]);
+	const [popupMessage, setPopupMessage] = useState("");
+
+	const serverFetch = async () => {
+		try {
+			const response = await axios.get("http://localhost:3000/movies");
+			setAdded(response.data);
+		} catch (error) {
+			console.error("Error fetching data:", error.message);
+		}
+	};
+
 	useEffect(() => {
-		const serverFetch = async () => {
-			try {
-				const response = await axios.get("http://localhost:3000/movies");
-				setAdded(response.data);
-			} catch (error) {
-				console.error("Error fetching data:", error.message);
-			}
-		};
-
 		serverFetch();
-	}, [setAdded]);
+	}, []);
 
-	const removeMovie = async (id) => {
-		await axios.delete(`http://localhost:3000/movies/id=${id}`);
+	const removeMovie = async (movie) => {
+		await axios.delete(`http://localhost:3000/movies/${movie.id}`);
+		setPopupMessage(`${movie.title} has been removed from the list!`);
+		setTimeout(() => setPopupMessage(""), 3000);
+		serverFetch();
 	};
 
 	return (
 		<>
+			{popupMessage && <div className="popup">{popupMessage}</div>}
 			{added.length > 0 && (
 				<div className="movieList">
-					{added.length > 0 &&
-						added.map((movie) => (
-							<div
-								key={movie.id}
-								className="movieCard"
-								style={{
-									backgroundImage: movie.poster_path
-										? `url(https://image.tmdb.org/t/p/w500/${movie.poster_path})`
-										: "url(/poster.png)",
-								}}
-								onClick={() => removeMovie(movie.id)}
-							>
-								<h3>{movie.title}</h3>
-							</div>
-						))}
+					{added.map((movie) => (
+						<div
+							key={movie.id}
+							className="movieCard"
+							style={{
+								backgroundImage: movie.poster_path
+									? `url(https://image.tmdb.org/t/p/w500/${movie.poster_path})`
+									: "url(/poster.png)",
+							}}
+							onClick={() => removeMovie(movie)}
+						>
+							<h3>{movie.title}</h3>
+						</div>
+					))}
 				</div>
 			)}
 		</>
 	);
-};
-
-Add.propTypes = {
-	added: PropTypes.arrayOf(
-		PropTypes.shape({
-			id: PropTypes.number.isRequired,
-			title: PropTypes.string.isRequired,
-			poster_path: PropTypes.string,
-		})
-	).isRequired,
-	setAdded: PropTypes.func.isRequired,
 };
 
 export default Add;

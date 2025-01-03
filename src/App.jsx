@@ -6,7 +6,6 @@ import Add from "./components/Add";
 
 function App() {
 	const [added, setAdded] = useState([]);
-	const [movies, setMovies] = useState([]);
 	const [section, setSection] = useState("add");
 	const [user, setUser] = useState("normal");
 	const changeUser = () => {
@@ -46,7 +45,7 @@ function App() {
 							Find
 						</button>
 					</div>
-					{section === "find" && <Find movies={movies} setMovies={setMovies} />}
+					{section === "find" && <Find />}
 					{section === "add" && <Add added={added} setAdded={setAdded} />}
 				</section>
 			)}

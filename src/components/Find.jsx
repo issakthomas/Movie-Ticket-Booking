@@ -1,17 +1,26 @@
-import PropTypes from "prop-types";
 import "./Find.css";
 import Search from "./Search";
 import { useState } from "react";
 import axios from "axios";
 
-const Find = ({ movies, setMovies }) => {
+const Find = () => {
+	const [movies, setMovies] = useState([]);
 	const [popupMessage, setPopupMessage] = useState("");
+
 	const addMovie = async (movie) => {
+		movie = { ...movie, id: movie.id.toString() };
+		const response = await axios.get("http://localhost:3000/movies");
+		if (response.data.some((m) => m.id == movie.id)) {
+			setPopupMessage(`${movie.title} is already in the list!`);
+			setTimeout(() => setPopupMessage(""), 3000);
+			console.log(movies);
+			return;
+		}
+		await axios.post("http://localhost:3000/movies", movie);
 		setPopupMessage(`${movie.title} has been added to the list!`);
 		setTimeout(() => setPopupMessage(""), 3000);
-		await axios.post("http://localhost:3000/movies", movie);
 	};
-	console.log(movies);
+
 	return (
 		<>
 			<Search setMovies={setMovies} />
@@ -45,17 +54,6 @@ const Find = ({ movies, setMovies }) => {
 			)}
 		</>
 	);
-};
-
-Find.propTypes = {
-	movies: PropTypes.arrayOf(
-		PropTypes.shape({
-			id: PropTypes.number.isRequired,
-			title: PropTypes.string.isRequired,
-			poster_path: PropTypes.string,
-		})
-	).isRequired,
-	setMovies: PropTypes.func.isRequired,
 };
 
 export default Find;

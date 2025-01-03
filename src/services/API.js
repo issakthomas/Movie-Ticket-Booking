@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const fetchMovie = async (query) => {
+export const fetchMovie = async (query) => {
 	try {
 		const options = {
 			method: "GET",
@@ -14,9 +14,7 @@ const fetchMovie = async (query) => {
 		const response = await axios.request(options);
 		return response.data.results;
 	} catch (error) {
-		console.error("Error fetching movie:", error);
+		console.error("Error fetching movie from server: ", error);
 		throw error;
 	}
 };
-
-export default fetchMovie;
