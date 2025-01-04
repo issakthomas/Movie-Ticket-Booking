@@ -3,30 +3,17 @@ import "./App.css";
 import Find from "./components/Find";
 import Now from "./components/Now";
 import Add from "./components/Add";
+import Header from "./Header";
 
 function App() {
 	const [added, setAdded] = useState([]);
 	const [section, setSection] = useState("add");
 	const [user, setUser] = useState("normal");
-	const changeUser = () => {
-		if (user == "normal") setUser("admin");
-		else setUser("normal");
-	};
 	console.log(added);
 
 	return (
 		<>
-			<header>
-				<div className="logo">
-					<i className="fa-solid fa-ticket"></i>
-					<span>Cinepass</span>
-				</div>
-				<input id="userSwitch" type="checkbox" />
-				<label htmlFor="userSwitch" onClick={changeUser}>
-					<span id="admin">ADMIN</span>
-					<i className="fa-solid fa-circle-user"></i>
-				</label>
-			</header>
+			<Header user={user} setUser={setUser} />
 			{user === "admin" && (
 				<section className="main">
 					<div className="buttons">
