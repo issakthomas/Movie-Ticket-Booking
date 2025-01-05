@@ -2,7 +2,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-color: white;
+    background-color: aliceblue;
     border-radius: 5px;
     padding: 20px;
 
@@ -10,6 +10,7 @@
         width: 100%;
         border: 0;
         border-radius: 5px;
+        background-color: transparent;
 
         &:focus {
             outline: none;

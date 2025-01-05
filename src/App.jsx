@@ -1,48 +1,39 @@
-import { useState } from "react";
 import "./App.css";
-import Find from "./components/Find";
-import Now from "./components/Now";
-import Add from "./components/Add";
-import Header from "./Header";
+import Header from "./components/Header";
+import { Route, Routes, useNavigate } from "react-router-dom";
+import Login from "./pages/Login";
+import Home from "./pages/Home";
+import Admin from "./pages/Admin";
+import { useEffect, useState } from "react";
 
 function App() {
-	const [added, setAdded] = useState([]);
-	const [section, setSection] = useState("add");
-	const [user, setUser] = useState("normal");
-	console.log(added);
+    const [user, setUser] = useState("");
+    const navigate = useNavigate();
 
-	return (
-		<>
-			<Header user={user} setUser={setUser} />
-			{user === "admin" && (
-				<section className="main">
-					<div className="buttons">
-						<button
-							value="add"
-							onClick={(e) => setSection(e.target.value)}
-							style={{ border: section == "add" ? "1px solid" : 0 }}
-						>
-							Add
-						</button>
-						<button
-							value="find"
-							onClick={(e) => setSection(e.target.value)}
-							style={{ border: section == "find" ? "1px solid" : 0 }}
-						>
-							Find
-						</button>
-					</div>
-					{section === "find" && <Find />}
-					{section === "add" && <Add added={added} setAdded={setAdded} />}
-				</section>
-			)}
-			{user === "normal" && (
-				<section className="main">
-					<Now added={added} setAdded={setAdded} />
-				</section>
-			)}
-		</>
-	);
+    useEffect(() => {
+        if (user === "normal") {
+            navigate("/");
+        } else if (user === "admin") {
+            navigate("/admin");
+        }
+        // else {
+        //     navigate("/login");
+        // }
+    }, [user, navigate]);
+
+    return (
+        <>
+            {(user === "normal" || user === "admin") && (
+                <Header setUser={setUser} />
+            )}
+            <Routes>
+                <Route path="/login" element={<Login setUser={setUser} />} />
+                <Route path="/" element={<Home />} />
+                <Route path="/admin/*" element={<Admin />} />
+                <Route path="*" element={<Login setUser={setUser} />} />
+            </Routes>
+        </>
+    );
 }
 
 export default App;

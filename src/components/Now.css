@@ -1,9 +1,0 @@
-.now {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-
-.nowTitle {
-    margin-bottom: 0;
-}
