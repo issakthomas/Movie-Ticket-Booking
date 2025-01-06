@@ -1,6 +1,5 @@
 import "./Admin.css";
-import { NavLink } from "react-router-dom";
-import { Routes, Route } from "react-router-dom";
+import { NavLink, Routes, Route } from "react-router-dom";
 import Add from "../components/Add";
 import Find from "../components/Find";
 

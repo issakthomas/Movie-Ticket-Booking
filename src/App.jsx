@@ -1,36 +1,20 @@
 import "./App.css";
 import Header from "./components/Header";
-import { Route, Routes, useNavigate } from "react-router-dom";
-import Login from "./pages/Login";
+import { Route, Routes } from "react-router-dom";
 import Home from "./pages/Home";
 import Admin from "./pages/Admin";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 function App() {
-    const [user, setUser] = useState("");
-    const navigate = useNavigate();
-
-    useEffect(() => {
-        if (user === "normal") {
-            navigate("/");
-        } else if (user === "admin") {
-            navigate("/admin");
-        }
-        // else {
-        //     navigate("/login");
-        // }
-    }, [user, navigate]);
+    const [user, setUser] = useState("normal");
 
     return (
         <>
-            {(user === "normal" || user === "admin") && (
-                <Header setUser={setUser} />
-            )}
+            <Header user={user} setUser={setUser} />
             <Routes>
-                <Route path="/login" element={<Login setUser={setUser} />} />
                 <Route path="/" element={<Home />} />
                 <Route path="/admin/*" element={<Admin />} />
-                <Route path="*" element={<Login setUser={setUser} />} />
+                <Route path="*" element={<Home />} />
             </Routes>
         </>
     );

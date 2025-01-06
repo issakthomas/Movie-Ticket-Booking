@@ -1,30 +1,33 @@
+import { useNavigate, useLocation } from "react-router-dom";
 import "./Header.css";
-import { Link } from "react-router-dom";
-import PropTypes from "prop-types";
+import { useEffect, useState } from "react";
 
-const Header = ({ setUser }) => {
-    const changeUser = () => {
-        setUser("");
-    };
+const Header = () => {
+    const navigate = useNavigate();
+    const location = useLocation();
+    const [admin, setAdmin] = useState(false);
+
+    useEffect(() => {
+        if (admin && !location.pathname.startsWith("/admin")) {
+            navigate("/admin/add");
+        } else if (!admin && location.pathname.startsWith("/admin")) {
+            navigate("/");
+        }
+    }, [admin, navigate, location.pathname]);
 
     return (
         <header>
-            <Link to={"/"} style={{ textDecoration: "none", color: "black" }}>
-                <div className="logoSection">
-                    <i className="fa-solid fa-ticket"></i>
-                    <span>Cinepass</span>
-                </div>
-            </Link>
+            <div className="logoSection" onClick={() => setAdmin(false)}>
+                <i className="fa-solid fa-ticket"></i>
+                <span>Cinepass</span>
+            </div>
+
             <i
-                onClick={changeUser}
+                onClick={() => setAdmin(!admin)}
                 className="fa-solid fa-circle-user user"
             ></i>
         </header>
     );
-};
-
-Header.propTypes = {
-    setUser: PropTypes.func.isRequired,
 };
 
 export default Header;
