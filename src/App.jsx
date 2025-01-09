@@ -4,20 +4,22 @@ import { Route, Routes } from "react-router-dom";
 import Home from "./pages/Home";
 import Admin from "./pages/Admin";
 import { useState } from "react";
+import View from "./pages/View";
 
 function App() {
-    const [user, setUser] = useState("normal");
+	const [user, setUser] = useState("normal");
 
-    return (
-        <>
-            <Header user={user} setUser={setUser} />
-            <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/admin/*" element={<Admin />} />
-                <Route path="*" element={<Home />} />
-            </Routes>
-        </>
-    );
+	return (
+		<>
+			<Header user={user} setUser={setUser} />
+			<Routes>
+				<Route path="/" element={<Home />} />
+				<Route path="/:id" element={<View />} />
+				<Route path="/admin/*" element={<Admin />} />
+				<Route path="*" element={<Home />} />
+			</Routes>
+		</>
+	);
 }
 
 export default App;

@@ -6,6 +6,7 @@ header {
     padding: 25px 10px;
 
     .logoSection {
+        cursor: pointer;
         font-size: 25px;
         font-weight: bold;
         align-items: center;
