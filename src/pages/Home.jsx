@@ -6,7 +6,9 @@ const Home = () => {
 	const [added, setAdded] = useState([]);
 	const serverFetch = async () => {
 		try {
-			const response = await axios.get("http://localhost:3000/movies");
+			const response = await axios.get(
+				"https://movie-ticket-booking-server-rqrt.onrender.com/movies"
+			);
 			setAdded(response.data);
 		} catch (error) {
 			console.error("Error fetching data:", error.message);

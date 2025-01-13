@@ -10,7 +10,9 @@ const View = () => {
 
 	const serverFetch = async (id) => {
 		try {
-			const response = await axios.get("http://localhost:3000/movies");
+			const response = await axios.get(
+				"https://movie-ticket-booking-server-rqrt.onrender.com/movies"
+			);
 			const movie = response.data.find((movie) => movie.id == id);
 			setMovieDetails(movie);
 		} catch (error) {
