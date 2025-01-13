@@ -3,8 +3,10 @@ import "./Booking.css";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { addDays, format } from "date-fns";
+import { useNavigate } from "react-router-dom";
 
 const Booking = () => {
+	const navigate = useNavigate();
 	const rows = 10;
 	const cols = 10;
 	const [selectedSeats, setSelectedSeats] = useState([]);
@@ -63,6 +65,7 @@ const Booking = () => {
 			setTimeout(() => setPopupMessage(""), 3000);
 			setSelectedSeats([]);
 			setSelectedTime("");
+			setTimeout(() => navigate("/"), 3000);
 		} else {
 			alert("Please select the options");
 		}

@@ -18,9 +18,11 @@ header {
         }
     }
 
-    .user    {
+    .user {
         font-size: 25px;
         border: 1px solid black;
+        display: flex;
+        align-items: center;
         border-radius: 50%;
         padding: 5px;
         cursor: pointer;
