@@ -5,6 +5,7 @@ import Home from "./pages/Home";
 import Admin from "./pages/Admin";
 import { useState } from "react";
 import View from "./pages/View";
+import Booking from "./pages/Booking";
 
 function App() {
 	const [user, setUser] = useState("normal");
@@ -15,6 +16,7 @@ function App() {
 			<Routes>
 				<Route path="/" element={<Home />} />
 				<Route path="/:id" element={<View />} />
+				<Route path="/:id/booking" element={<Booking />} />
 				<Route path="/admin/*" element={<Admin />} />
 				<Route path="*" element={<Home />} />
 			</Routes>

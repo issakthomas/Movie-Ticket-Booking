@@ -1,0 +1,147 @@
+.booking {
+    height: calc(100vh - 94px);
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+
+    .seatSection {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+
+        .seatLayout {
+            display: grid;
+            grid-template-columns: repeat(10, 35px);
+            gap: 15px;
+
+            .seat {
+                width: 35px;
+                height: 35px;
+                font-size: 12px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border: 1px solid #999;
+                border-radius: 5px;
+                cursor: pointer;
+            }
+
+            .selected {
+                background-color: lightblue;
+            }
+
+        }
+
+        .screen {
+            margin: 0 auto;
+            width: 250px;
+            font-size: 12px;
+            text-align: center;
+            border: 1px solid #999;
+            padding: 5px;
+        }
+    }
+
+    .detailSection {
+        .datePicker {
+            border: 1px solid#999;
+            padding: 25px;
+            border-radius: 5px;
+
+            .react-datepicker__input-container {
+                input {
+                    border: none;
+                    padding: 10px 20px;
+                    border-radius: 25px;
+                    background-color: #f0f0f0;
+                    font-size: 16px;
+                    cursor: pointer;
+                    text-align: center;
+                    width: 200px;
+
+                    &:focus {
+                        outline: none;
+                        border: 2px solid #007bff;
+                    }
+                }
+            }
+        }
+
+        .timePicker {
+            margin: 20px 0;
+            display: grid;
+            gap: 20px;
+            border: 1px solid#999;
+            padding: 25px;
+            border-radius: 5px;
+
+            div {
+                border: none;
+                padding: 10px 20px;
+                border-radius: 25px;
+                background-color: #f0f0f0;
+                font-size: 16px;
+                cursor: pointer;
+                text-align: center;
+                width: 200px;
+            }
+
+            .selected {
+                background-color: lightblue;
+            }
+        }
+
+        .book {
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            background-color: #f0f0f0;
+            font-size: 16px;
+            cursor: pointer;
+            text-align: center;
+            width: 200px;
+            width: 100%;
+
+            &:hover {
+                background-color: lightblue;
+            }
+        }
+    }
+}
+
+@media(max-width:740px) {
+    .booking {
+        height: auto;
+        flex-direction: column;
+        margin: 25px 0;
+        gap: 20px;
+    }
+}
+
+@media(max-width:520px) {
+    .booking {
+        .seatSection {
+            .seatLayout {
+                gap: 10px;
+            }
+        }
+    }
+}
+
+@media(max-width:430px) {
+    .booking {
+        .seatSection {
+            .seatLayout {
+                grid-template-columns: repeat(10, 30px);
+                gap: 8px;
+
+                .seat {
+                    width: 30px;
+                    height: 30px;
+                }
+            }
+        }
+    }
+}

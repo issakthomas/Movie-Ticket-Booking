@@ -1,9 +1,10 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import "./View.css";
 
 const View = () => {
+	const navigate = useNavigate();
 	const { id } = useParams();
 	const [movieDetails, setMovieDetails] = useState({});
 
@@ -45,7 +46,9 @@ const View = () => {
 				<h1>{movieDetails?.title}</h1>
 				<span>{movieDetails?.overview}</span>
 				<p>Release Date: {movieDetails.release_date}</p>
-				<button>Book Ticket</button>
+				<button onClick={() => navigate(`/${movieDetails.id}/booking`)}>
+					Book Ticket
+				</button>
 			</div>
 		</div>
 	);
