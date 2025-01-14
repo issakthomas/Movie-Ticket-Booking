@@ -18,14 +18,22 @@ header {
         }
     }
 
-    .user {
-        font-size: 25px;
-        border: 1px solid black;
+    .iconSection {
         display: flex;
         align-items: center;
-        border-radius: 50%;
+        border: 1px solid black;
+        border-radius: 25px;
         padding: 5px;
+        gap: 5px;
         cursor: pointer;
-    }
 
+        span {
+            margin-left: 5px;
+        }
+
+        .user {
+            font-size: 25px;
+        }
+
+    }
 }
