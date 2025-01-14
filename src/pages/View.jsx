@@ -6,6 +6,7 @@ import "./View.css";
 const View = () => {
 	const navigate = useNavigate();
 	const { id } = useParams();
+	console.log(id)
 	const [movieDetails, setMovieDetails] = useState({});
 
 	const serverFetch = async (id) => {
