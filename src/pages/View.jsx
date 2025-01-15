@@ -6,8 +6,8 @@ import "./View.css";
 const View = () => {
 	const navigate = useNavigate();
 	const { id } = useParams();
-	console.log(id)
 	const [movieDetails, setMovieDetails] = useState({});
+	const [loading, setLoading] = useState(true);
 
 	const serverFetch = async (id) => {
 		try {
@@ -18,6 +18,8 @@ const View = () => {
 			setMovieDetails(movie);
 		} catch (error) {
 			console.error("Error fetching data:", error.message);
+		} finally {
+			setLoading(false);
 		}
 	};
 
@@ -25,9 +27,13 @@ const View = () => {
 		serverFetch(id);
 	}, [id]);
 
-	useEffect(() => {
-		console.log(movieDetails);
-	}, [movieDetails]);
+	if (loading) {
+		return (
+			<div className="loaderWrapper">
+				<div className="loader"></div>
+			</div>
+		);
+	}
 
 	return (
 		<div

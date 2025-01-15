@@ -13,6 +13,7 @@ const Booking = () => {
 	const [selectedDate, setSelectedDate] = useState(new Date());
 	const [selectedTime, setSelectedTime] = useState("");
 	const [popupMessage, setPopupMessage] = useState("");
+	const [booking, setBooking] = useState(true);
 
 	useEffect(() => {
 		console.log(selectedSeats);
@@ -61,6 +62,7 @@ const Booking = () => {
 
 	const handleBook = () => {
 		if (selectedDate && selectedSeats.length > 0 && selectedTime) {
+			setBooking(false);
 			setPopupMessage("The tickets are booked!");
 			setTimeout(() => setPopupMessage(""), 3000);
 			setSelectedSeats([]);
@@ -72,44 +74,55 @@ const Booking = () => {
 	};
 
 	return (
-		<div className="booking">
-			<div className="seatSection">
-				<h2>Select Your Seats</h2>
-				<div className="seatLayout">{renderSeats()}</div>
-				<div className="screen">SCREEN</div>
-			</div>
-			<div className="detailSection">
-				<div className="datePicker">
-					<DatePicker
-						selected={selectedDate}
-						onChange={handleDateChange}
-						minDate={new Date()}
-						maxDate={addDays(new Date(), 7)}
-						placeholderText="Select a date between today and a week from now"
-						dateFormat="MM/dd/yyyy"
-					/>
+		<>
+			{popupMessage && <div className="popup">{popupMessage}</div>}
+			{booking ? (
+				<div className="booking">
+					<div className="seatSection">
+						<h2>Select Your Seats</h2>
+						<div className="seatLayout">{renderSeats()}</div>
+						<div className="screen">SCREEN</div>
+					</div>
+					<div className="detailSection">
+						<div className="datePicker">
+							<DatePicker
+								selected={selectedDate}
+								onChange={handleDateChange}
+								minDate={new Date()}
+								maxDate={addDays(new Date(), 7)}
+								placeholderText="Select a date between today and a week from now"
+								dateFormat="MM/dd/yyyy"
+							/>
+						</div>
+						<div className="timePicker">
+							{[
+								"10:00 AM",
+								"01:00 PM",
+								"04:00 PM",
+								"07:00 PM",
+							].map((time) => (
+								<div
+									key={time}
+									className={`timeOption ${
+										selectedTime === time ? "selected" : ""
+									}`}
+									onClick={() => handleTimeClick(time)}
+								>
+									{time}
+								</div>
+							))}
+						</div>
+						<button className="book" onClick={handleBook}>
+							Book
+						</button>
+					</div>
 				</div>
-				<div className="timePicker">
-					{["10:00 AM", "01:00 PM", "04:00 PM", "07:00 PM"].map(
-						(time) => (
-							<div
-								key={time}
-								className={`timeOption ${
-									selectedTime === time ? "selected" : ""
-								}`}
-								onClick={() => handleTimeClick(time)}
-							>
-								{time}
-							</div>
-						)
-					)}
+			) : (
+				<div className="loaderWrapper">
+					<div className="loader"></div>
 				</div>
-				<button className="book" onClick={handleBook}>
-					Book
-				</button>
-				{popupMessage && <div className="popup">{popupMessage}</div>}
-			</div>
-		</div>
+			)}
+		</>
 	);
 };
 

@@ -5,6 +5,7 @@ import { useState } from "react";
 const Add = () => {
 	const [added, setAdded] = useState([]);
 	const [popupMessage, setPopupMessage] = useState("");
+	const [loading, setLoading] = useState(true);
 
 	const serverFetch = async () => {
 		try {
@@ -14,6 +15,8 @@ const Add = () => {
 			setAdded(response.data);
 		} catch (error) {
 			console.error("Error fetching data:", error.message);
+		} finally {
+			setLoading(false);
 		}
 	};
 
@@ -30,10 +33,18 @@ const Add = () => {
 		serverFetch();
 	};
 
+	if (loading) {
+		return (
+			<div className="loaderWrapper">
+				<div className="loader"></div>
+			</div>
+		);
+	}
+
 	return (
 		<>
 			{popupMessage && <div className="popup">{popupMessage}</div>}
-			{added.length > 0 ? (
+			{added.length > 0 && (
 				<div className="cardSection">
 					<div className="titleSection">
 						<span>Added Movies</span>
@@ -55,11 +66,6 @@ const Add = () => {
 							</div>
 						))}
 					</div>
-				</div>
-			) : (
-				<div className="empty">
-					&ldquo;The show must go on… but first, we need some
-					movies!&quot;
 				</div>
 			)}
 		</>
