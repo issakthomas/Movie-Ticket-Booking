@@ -6,6 +6,7 @@ import Admin from "./pages/Admin";
 import { useState } from "react";
 import View from "./pages/View";
 import Booking from "./pages/Booking";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
 	const [user, setUser] = useState("normal");

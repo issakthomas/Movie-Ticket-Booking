@@ -11,7 +11,7 @@ const Home = () => {
 	const serverFetch = async () => {
 		try {
 			const response = await axios.get(
-				"https://movie-ticket-booking-server-rqrt.onrender.com/movies"
+				`https://movie-ticket-booking-server-rqrt.onrender.com/movies?_=${new Date().getTime()}`
 			);
 			setAdded(response.data);
 		} catch (error) {
